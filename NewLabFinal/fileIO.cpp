@@ -17,7 +17,7 @@
  *   Returns the CSV file as a list of table entries
  */
 std::vector<TableEntry> readCSVFile(const std::string& filename) {
-    std::fstream f(filename);
+    std::ifstream f(filename);
     std::string line;
     std::vector<TableEntry> table;
 
@@ -56,11 +56,11 @@ std::vector<TableEntry> readCSVFile(const std::string& filename) {
 void writeCSVFile(const std::string& filename, const std::vector<TableEntry>& table) {
     std::ofstream f(filename);
     
-    for (const TableEntry& e : table) {
-        f << e.id << ','
-          << e.username << ','
-          << e.siteURL << ','
-          << e.password << std::endl;
+    for (int i = 0; i < table.size(); i++) {
+        f << table[i].id << ','
+          << table[i].username << ','
+          << table[i].siteURL << ','
+          << table[i].password << std::endl;
     }
 }
 

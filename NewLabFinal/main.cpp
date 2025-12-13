@@ -25,8 +25,19 @@ int main() {
 
 		do {
 			std::cout << "> ";
-			std::cin >> option;
-			std::cin.ignore(IGNORE_SIZE, '\n');
+
+			/* Rejects input that aren't integers */
+			if (!(std::cin >> option)) {
+				std::cout << "Invalid input!" << std::endl;
+				std::cin.clear();
+				std::cin.ignore(IGNORE_SIZE, '\n');
+				continue;
+			}
+
+			std::cin.ignore(IGNORE_SIZE, '\n'); /* You will see this line a lot because cin leaves a newline
+												 * in the input buffer which can mess with a getline call afterwards.
+												 * So we have to call cin.ignore() to discard it.
+												 */
 
 			if (option == 1) {
 				addNewPassword(passFilename);

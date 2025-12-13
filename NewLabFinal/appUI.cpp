@@ -34,7 +34,14 @@ void searchForPasswords(const std::string& filename) {
 
 	do {
 		std::cout << "> ";
-		std::cin >> option;
+
+		if (!(std::cin >> option)) {
+			std::cout << "Invalid input!" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(IGNORE_SIZE, '\n');
+			continue;
+		}
+
 		std::cin.ignore(IGNORE_SIZE, '\n');
 
 		if (option != 1 && option != 2) {

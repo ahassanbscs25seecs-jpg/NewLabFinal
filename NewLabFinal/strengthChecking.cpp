@@ -5,11 +5,13 @@
 #include <set>
 #include <cmath>
 
+/* Checks if the given password has an easy pattern or not. */
 bool hasEasyPattern(const std::string& password) {
 	std::string lower = password;
 
-	for (char& c : lower)
-		c = std::tolower(c);
+	for (int i = 0; i < lower.size(); i++) {
+		lower[i] = std::tolower(lower[i]);
+	}
 
 	return lower.find("1234") != std::string::npos ||
 		lower.find("abcd") != std::string::npos ||
@@ -22,6 +24,8 @@ bool hasEasyPattern(const std::string& password) {
 
 	return false;
 }
+
+/* Checks if the given password has repetition. */
 bool hasRepetition(const std::string& password) {
 	for (int i = 0; i < password.size() - 2; i++) {
 		if (password[i] == password[i + 1] && password[i] == password[i + 2]) {
@@ -31,6 +35,7 @@ bool hasRepetition(const std::string& password) {
 	return false;
 }
 
+/* Calculuates the entropy of the given code--i.e., the amount of variation. */
 double calculateEntropy(const std::string& password) {
 	double entropy = 0.00;
 	int characterSetSize = 0;
@@ -73,6 +78,7 @@ double calculateEntropy(const std::string& password) {
 	return entropy;
 }
 
+/* Calculates the strength score of the given code. */
 int calculateStrengthScore(const std::string& password) {
 	int points = 0;
 	std::set<char> uniqueChars;
@@ -93,8 +99,8 @@ int calculateStrengthScore(const std::string& password) {
 
 	// Character and Length points 
 	bool hasUpper = false, hasLower = false, hasDigit = false, hasSpecial = false;
-	for (char ch : password) {
-		unsigned char uch = static_cast<unsigned char>(ch);
+	for (int i = 0; i < password.size(); i++) {
+		unsigned char uch = static_cast<unsigned char>(password[i]);
 		uniqueChars.insert(uch);
 
 		if (isupper(uch))  hasUpper = true;
@@ -109,7 +115,6 @@ int calculateStrengthScore(const std::string& password) {
 
 	if (len >= 12) points += 10;
 	else if (len >= 10) points += 8;
-
 
 	//UNique char bonus
 	int unique_count = (int)uniqueChars.size();
@@ -137,6 +142,7 @@ int calculateStrengthScore(const std::string& password) {
 	return points;
 }
 
+/* Retrieves a strength label for the given strength score */
 std::string strengthLabel(int points) {
 	std::string label = "";
 
@@ -156,6 +162,7 @@ std::string strengthLabel(int points) {
 	return label;
 }
 
+/* Retrieves the password from the user and returns it as a std::string */
 std::string getPasswordInput() {
 	std::string password;
 

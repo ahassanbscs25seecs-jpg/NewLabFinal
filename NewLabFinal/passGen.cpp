@@ -32,21 +32,25 @@ std::string genNewPassword(int len, bool charTypes[4], bool hasRepetition) {
 	std::vector<const char*> allowedSets;
 	std::vector<int> allowedSizes;
 
+	/* If we want digits */
 	if (charTypes[(int)CharClasses::DIGITS]) {
 		allowedSets.push_back(DIGITS);
 		allowedSizes.push_back(sizeof(DIGITS) - 1);
 	}
 
+	/* If we want special */
 	if (charTypes[(int)CharClasses::SPECIAL]) {
 		allowedSets.push_back(SPECIAL);
 		allowedSizes.push_back(sizeof(SPECIAL) - 1);
 	}
 
+	/* If we want uppercase letters */
 	if (charTypes[(int)CharClasses::UPPER]) {
 		allowedSets.push_back(UPPER);
 		allowedSizes.push_back(26);
 	}
 
+	/* If we want lowercase letters */
 	if (charTypes[(int)CharClasses::LOWER]) {
 		allowedSets.push_back(LOWER);
 		allowedSizes.push_back(26);
@@ -69,8 +73,7 @@ std::string genNewPassword(int len, bool charTypes[4], bool hasRepetition) {
 
 			pass.push_back(set[std::rand() % size]);
 		}
-	}
-	else {
+	} else {
 		/* Fill without repetition. */
 		bool isUsed[128] = { false };
 

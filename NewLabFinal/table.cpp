@@ -5,7 +5,15 @@
 #include "table.h"
 
 /**
- *
+ * searchByUsername:
+ *   Return a table consisting of all the entries with entries having the specified username.
+ * 
+ * Arguments:
+ *   -> table: The table we are searching.
+ *   -> username: The username to match.
+ * 
+ * Return value:
+ *   A table containing records with the username specified.
  */
 std::vector<TableEntry> searchByUsername(const std::vector<TableEntry>& table, const std::string& username) {
     std::vector<TableEntry> result;
@@ -20,7 +28,15 @@ std::vector<TableEntry> searchByUsername(const std::vector<TableEntry>& table, c
 }
 
 /**
+ * searchByUsername:
+ *   Return a table consisting of all the entries with entries having the specified site URL.
  *
+ * Arguments:
+ *   -> table: The table we are searching.
+ *   -> username: The site URL to match.
+ *
+ * Return value:
+ *   A table containing records with the site URL specified.
  */
 std::vector<TableEntry> searchBySiteURL(const std::vector<TableEntry>& table, const std::string& siteURL) {
     std::vector<TableEntry> result;
@@ -47,16 +63,15 @@ std::vector<TableEntry> searchBySiteURL(const std::vector<TableEntry>& table, co
 void printTable(const std::vector<TableEntry>& table) {
     std::cout << std::left
         << std::setw(8) << "ID"
-        << std::setw(15) << "Username"
-        << std::setw(25) << "Site URL"
-        << std::setw(20) << "Password"
-        << "\n-------------------------------------------------------------" << std::endl;
+        << std::setw(30) << "Username"
+        << std::setw(30) << "Site URL"
+        << std::setw(20) << "Password" << std::endl;
 
     for (const auto& e : table) {
         std::cout << std::left
                   << std::setw(8) << e.id
-                  << std::setw(15) << e.username
-                  << std::setw(25) << e.siteURL
+                  << std::setw(30) << e.username
+                  << std::setw(30) << e.siteURL
                   << std::setw(20) << e.password
                   << std::endl;
     }
